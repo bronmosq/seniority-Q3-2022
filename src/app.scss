@@ -1,4 +1,8 @@
 .app {
   max-width: 1024px;
   margin: auto;
+
+  &__title {
+    color: var(--black-color);
+  }
 }

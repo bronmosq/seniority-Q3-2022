@@ -1,5 +1,7 @@
 :root {
-  --main-color: #505050ff;
+  --main-color: #505050;
+  --black-color: #333;
+  --bg-color: #e6e6e6ff;
 }
 
 body {
@@ -8,7 +10,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e6e6e6ff;
+  background-color: var(--bg-color);
 }
 
 code {
