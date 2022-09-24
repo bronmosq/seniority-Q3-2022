@@ -10,5 +10,3 @@ Estándar de buenas prácticas: https://pichincha.atlassian.net/wiki/spaces/CFE/
 Estándar de pruebas unitarias: https://pichincha.atlassian.net/wiki/spaces/CFE/pages/2496397839/Est+ndar+de+Pruebas+Unitarias+-+React
 
 Debe utilizar la metodología Atomic Design.
-De usar BEM con Sass.
-Debe tener un coverage mínimo de 75%.
