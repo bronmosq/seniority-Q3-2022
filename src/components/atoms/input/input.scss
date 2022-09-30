@@ -1,0 +1,30 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  &__field {
+    border: none;
+    width: 100%;
+    -webkit-appearance: none !important;
+    padding: 10px;
+  }
+
+  &__field-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+
+    &--error {
+      border: 2px solid red;
+    }
+  }
+
+  &__error-message {
+    color: red;
+  }
+}

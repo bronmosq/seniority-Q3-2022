@@ -2,12 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './app'
 import reportWebVitals from './reportWebVitals'
+import { setupStore } from './store/store'
 
 import './index.scss'
+import { Provider } from 'react-redux'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={setupStore()}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

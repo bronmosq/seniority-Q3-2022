@@ -1,0 +1,7 @@
+.cards-grid {
+  display: grid;
+  grid-template-columns: [x0] 1fr [x1] 1fr [x2] 1fr [x3];
+  grid-template-rows: [y0] 1fr [y1] 1fr [y2] 1fr [y3];
+  gap: 20px;
+  padding: 2rem 0;
+}
