@@ -12,16 +12,16 @@ describe('Card', () => {
     defense: 99,
     skills: 99
   }
-  it('should display the player image', () => {
-    const { container } = render(<Card {...player} />)
-    const image = container.getElementsByClassName('card__image')
-    expect(image).toHaveLength(1)
-  })
-  it('should have two bottows with two images', () => {
-    const { container } = render(<Card {...player} />)
-    const buttons = screen.getAllByRole('button')
-    expect(buttons).toHaveLength(2)
-    const icons = container.getElementsByClassName('card__icon')
-    expect(icons).toHaveLength(2)
-  })
+  // it('should display the player image', () => {
+  //   const { container } = render(<Card {...player} />)
+  //   const image = container.getElementsByClassName('card__image')
+  //   expect(image).toHaveLength(1)
+  // })
+  // it('should have two bottows with two images', () => {
+  //   const { container } = render(<Card {...player} />)
+  //   const buttons = screen.getAllByRole('button')
+  //   expect(buttons).toHaveLength(2)
+  //   const icons = container.getElementsByClassName('card__icon')
+  //   expect(icons).toHaveLength(2)
+  // })
 })

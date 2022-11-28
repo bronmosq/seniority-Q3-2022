@@ -20,7 +20,7 @@ describe('Input', () => {
   })
   it('should have an error color', () => {
     const { container } = render(<Input variant="error" />)
-    const inputWrapper = container.getElementsByClassName('input__field-wrapper--error').length
+    const inputWrapper = container.getElementsByClassName('input__field--error').length
     expect(inputWrapper).toBe(1)
   })
 

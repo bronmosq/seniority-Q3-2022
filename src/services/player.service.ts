@@ -1,18 +1,7 @@
 import axios from 'axios'
+import { Player } from '../utils/interfaces/player'
 
 const API_URL = 'https://api-exercise-q3.herokuapp.com/player/54'
-
-export interface Player {
-  id: number
-  firstName: string
-  lastName: string
-  image: string
-  attack: number
-  defense: number
-  skills: number
-  idAuthor: number
-  idPosition: number
-}
 
 export class PlayerService {
   static async getPlayers() {

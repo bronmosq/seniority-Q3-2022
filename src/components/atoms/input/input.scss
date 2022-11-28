@@ -5,25 +5,16 @@
   margin-bottom: 10px;
 
   &__field {
-    border: none;
+    // border-webkit-appearance: none !important;
     width: 100%;
-    -webkit-appearance: none !important;
     padding: 10px;
-  }
-
-  &__field-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
     border: 2px solid lightgray;
-    border-radius: 5px;
-
+    padding: 1rem 0.5rem;
     &--error {
       border: 2px solid red;
     }
   }
-
+  
   &__error-message {
     color: red;
   }

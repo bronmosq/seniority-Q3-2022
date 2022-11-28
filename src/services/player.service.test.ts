@@ -1,6 +1,7 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import { Player, PlayerService } from './player.service'
+import { Player } from '../utils/interfaces/player'
+import { PlayerService } from './player.service'
 
 const axiosMock = new MockAdapter(axios)
 

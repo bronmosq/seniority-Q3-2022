@@ -1,0 +1,35 @@
+.card-header {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  &__image {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+  &__info-wrapper {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background-color: rgba($color: white, $alpha: 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__player-name {
+    color: black;
+    width: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+  }
+}
