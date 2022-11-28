@@ -6,9 +6,10 @@ export interface ModalProps {
   title: string
   showModal: boolean
   handleShowModal: () => void
+  children: React.ReactNode
 }
 
-const Modal: FC<ModalProps> = ({ title = '', showModal, handleShowModal }) => {
+const Modal: FC<ModalProps> = ({ title = '', showModal, handleShowModal, children }) => {
   return (
     <div className={`modal ${!showModal ? 'modal--hidden' : ''}`}>
       <div className="modal__outside" onClick={handleShowModal}></div>
@@ -17,6 +18,7 @@ const Modal: FC<ModalProps> = ({ title = '', showModal, handleShowModal }) => {
           <h2>{title}</h2>
           <img onClick={handleShowModal} className="modal__close-icon" src={CloseIcon} />
         </div>
+        <div className="modal__content">{children}</div>
       </div>
     </div>
   )

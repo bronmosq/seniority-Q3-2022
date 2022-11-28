@@ -19,7 +19,7 @@
   &__body {
     position: fixed;
     width: 70vw;
-    height: 70vh;
+    height: 60vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -31,7 +31,10 @@
   &__top-content {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+  }
+
+  &__content {
+    height: 100%;
   }
 
   &__close-icon {
