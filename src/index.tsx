@@ -4,11 +4,13 @@ import App from './app'
 import reportWebVitals from './reportWebVitals'
 
 import './index.scss'
-import { Provider } from 'react-redux'
+import { PlayersProvider } from './context/players-context/players-context'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <PlayersProvider>
+      <App />
+    </PlayersProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )
