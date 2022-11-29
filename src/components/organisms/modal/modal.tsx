@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import './modal.scss'
 import CloseIcon from '../../../assets/close-icon.svg'
+import { createPortal } from 'react-dom'
 
 export interface ModalProps {
   title: string
@@ -10,8 +11,9 @@ export interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = ({ title = '', showModal, handleShowModal, children }) => {
-  return (
-    <div className={`modal ${!showModal ? 'modal--hidden' : ''}`}>
+  if (!showModal) return null
+  return createPortal(
+    <div className="modal">
       <div className="modal__outside" onClick={handleShowModal}></div>
       <div className="modal__body">
         <div className="modal__top-content">
@@ -20,7 +22,8 @@ const Modal: FC<ModalProps> = ({ title = '', showModal, handleShowModal, childre
         </div>
         <div className="modal__content">{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
 

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { PlayersService } from '../../../services/player.service'
 import { Player } from '../../../utils/interfaces/player'
 import { PlayersStateContext } from '../players-context'
 
@@ -8,21 +9,16 @@ const usePlayers = (initalValue?: Partial<PlayersStateContext>) => {
 
   const handleChangeModal = () => {
     setActiveModal(!activeModal)
-    // setPlayersList([
-    //   ...playersList,
-    //   {
-    //     id: 2,
-    //     firstName: 'as',
-    //     lastName: '2',
-    //     image: '/',
-    //     attack: 0,
-    //     defense: 0,
-    //     skills: 0,
-    //     idAuthor: 54,
-    //     idPosition: 1
-    //   }
-    // ])
   }
+
+  const getPlayers = async () => {
+    const playersResponse = (await PlayersService.getPlayers()) || []
+    setPlayersList(playersResponse)
+  }
+
+  useEffect(() => {
+    getPlayers()
+  })
 
   return {
     playersList,

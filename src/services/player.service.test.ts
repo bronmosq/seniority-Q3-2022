@@ -1,7 +1,7 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { Player } from '../utils/interfaces/player'
-import { PlayerService } from './player.service'
+import { PlayersService } from './player.service'
 
 const axiosMock = new MockAdapter(axios)
 
@@ -21,7 +21,7 @@ describe('User Service', () => {
         idPosition: 1
       }
     ] as Player[])
-    const players = await PlayerService.getPlayers()
+    const players = await PlayersService.getPlayers()
     expect(players).toBeDefined()
     expect(players).toBeInstanceOf(Array)
   })

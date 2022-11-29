@@ -2,6 +2,7 @@ import { createContext, FC, useContext } from 'react'
 import { DEFAULT_IMAGE } from '../../utils/constants/player'
 import { Player } from '../../utils/interfaces/player'
 import usePlayers from './use-players/use-players'
+import { PlayersService } from '../../services/player.service'
 
 export interface PlayersStateContext {
   playersList: Player[]
@@ -21,30 +22,7 @@ export const PlayersContext = createContext<PlayersStateContext>(
 )
 
 const INITIAL_PROPS: PlayersStateContext = {
-  playersList: [
-    {
-      id: 1,
-      firstName: 'Cristiano',
-      lastName: 'Ronaldo',
-      image: DEFAULT_IMAGE,
-      attack: 99,
-      defense: 99,
-      skills: 99,
-      idAuthor: 54,
-      idPosition: 1
-    },
-    {
-      id: 2,
-      firstName: 'Cristiano',
-      lastName: 'Ronaldo',
-      image: DEFAULT_IMAGE,
-      attack: 99,
-      defense: 99,
-      skills: 99,
-      idAuthor: 54,
-      idPosition: 1
-    }
-  ],
+  playersList: [],
   activeModal: false,
   handleChangeModal: () => {}
 }

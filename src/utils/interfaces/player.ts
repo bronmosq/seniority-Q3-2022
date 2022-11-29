@@ -6,6 +6,6 @@ export interface Player {
   attack: number
   defense: number
   skills: number
-  idAuthor: number
+  idAuthor: number | string
   idPosition: number
 }
