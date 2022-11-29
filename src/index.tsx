@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals'
 
 import './index.scss'
 import { PlayersProvider } from './context/players-context/players-context'
+import Alert from './components/molecules/alert/alert'
 
 ReactDOM.render(
   <React.StrictMode>

@@ -4,7 +4,6 @@ import { usePlayersContext } from '../../../context/players-context/players-cont
 
 export const CardsGrid = () => {
   const { playersList } = usePlayersContext()
-  if (playersList.length === 0) return <span>Cargando...</span>
 
   return (
     <div className="cards-grid">

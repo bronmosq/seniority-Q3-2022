@@ -2,13 +2,15 @@ import { createContext, FC, useContext } from 'react'
 import { DEFAULT_IMAGE } from '../../utils/constants/player'
 import { Player } from '../../utils/interfaces/player'
 import usePlayers from './use-players/use-players'
-import { PlayersService } from '../../services/player.service'
 
 export interface PlayersStateContext {
   playersList: Player[]
   activeModal: boolean
+  activeAlert: boolean
+  alertMessage: string
   handleChangeModal: () => void
-  // deletePlayer: (id: number) => void
+  handleCloseAlert?: () => void
+  deletePlayer: (id: number) => void
   // updatePlayer: (id: number) => void
 }
 
@@ -24,7 +26,10 @@ export const PlayersContext = createContext<PlayersStateContext>(
 const INITIAL_PROPS: PlayersStateContext = {
   playersList: [],
   activeModal: false,
-  handleChangeModal: () => {}
+  activeAlert: false,
+  alertMessage: '',
+  handleChangeModal: () => {},
+  deletePlayer: () => {}
 }
 
 export const usePlayersContext = () => useContext(PlayersContext)
@@ -33,6 +38,6 @@ export const PlayersProvider: FC<PlayersProviderProps> = ({
   children,
   initialValue = INITIAL_PROPS
 }) => {
-  const values = usePlayers(initialValue as any)
+  const values = usePlayers(initialValue)
   return <PlayersContext.Provider value={values}>{children}</PlayersContext.Provider>
 }

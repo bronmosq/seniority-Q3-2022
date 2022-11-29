@@ -1,0 +1,23 @@
+.alert {
+  position: fixed;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &--hidden {
+    display: none;
+  }
+
+  &__close-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+}
