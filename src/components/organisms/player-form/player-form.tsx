@@ -8,13 +8,14 @@ import Slider from '../../atoms/slider/slider'
 import Select from '../../atoms/select/select'
 import usePlayerForm from './use-player-form/use-player-form'
 import { Button } from '../../atoms/button/button'
+import { usePlayersContext } from '../../../context/players-context/players-context'
 
 const RegisterForm: FC = () => {
-  const { handleChangeInput, player, positions, registerPlayer, isButtonEnabled } = usePlayerForm()
+  const { handleChangeInput, player, positions, managePlayer, isButtonEnabled } = usePlayerForm()
   return (
     <div className="player-form">
       <div className="player-form__image-column">
-        <img className="player-form__image" src={DEFAULT_IMAGE} />
+        <img className="player-form__image" src={player.image ? player.image : DEFAULT_IMAGE} />
       </div>
       <div className="player-form__content-column">
         <div className="player-form__wrapper">
@@ -81,7 +82,7 @@ const RegisterForm: FC = () => {
             name="skills"
           />
           <div className="player-form__button-wrapper">
-            <Button disabled={!isButtonEnabled} onClick={registerPlayer}>
+            <Button disabled={!isButtonEnabled} onClick={managePlayer}>
               Agregar
             </Button>
           </div>

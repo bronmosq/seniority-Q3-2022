@@ -3,9 +3,11 @@ import {
   fetchPlayers,
   deletePlayer as deletePlayerService,
   getPositions as getPositionsService,
-  addPlayer as addPlayerService
+  addPlayer as addPlayerService,
+  updatePlayer as updatePlayerService
 } from '../../../services/player.service'
 import { Player, PlayerPosition } from '../../../utils/interfaces/player'
+import { EMPTY_PLAYER } from '../../../utils/constants/player'
 
 const usePlayers = () => {
   const [activeModal, setActiveModal] = useState(false)
@@ -14,6 +16,7 @@ const usePlayers = () => {
   const [activeAlert, setActiveAlert] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
   const [showLoadingOverlay, setShowLoadingOverlay] = useState(false)
+  const [activePlayer, setActivePlayer] = useState<Player>(EMPTY_PLAYER)
 
   const handleChangeModal = () => {
     setActiveModal(!activeModal)
@@ -23,8 +26,8 @@ const usePlayers = () => {
     setActiveAlert(false)
   }
 
-  const getPlayers = async () => {
-    setShowLoadingOverlay(true)
+  const getPlayers = async (showOverlay = true) => {
+    if (showOverlay) setShowLoadingOverlay(true)
     await fetchPlayers()
       .then((res) => {
         setTimeout(() => {
@@ -48,6 +51,9 @@ const usePlayers = () => {
     setTimeout(() => {
       setActiveAlert(true)
       setAlertMessage(message)
+      setTimeout(() => {
+        setActiveAlert(false)
+      }, 5000)
     }, 1500)
   }
 
@@ -64,6 +70,20 @@ const usePlayers = () => {
     handleChangeModal()
   }
 
+  const addActivePlayer = async (player: Player) => {
+    setActivePlayer(player)
+  }
+
+  const updatePlayer = async (id: number) => {
+    handleChangeModal()
+    const player = playersList.find(({ id: playerId }) => playerId === id)
+    setActivePlayer(player!)
+    await updatePlayerService(id, activePlayer)
+    showAlert('Se modifico al jugador')
+    getPlayers()
+    // getPlayers()
+  }
+
   return {
     playersList,
     activeModal,
@@ -71,10 +91,13 @@ const usePlayers = () => {
     alertMessage,
     positions,
     showLoadingOverlay,
+    activePlayer,
     handleChangeModal,
     deletePlayer,
     handleCloseAlert,
-    addPlayer
+    addPlayer,
+    updatePlayer,
+    addActivePlayer
   }
 }
 

@@ -1,23 +1,10 @@
 import { useState, useMemo } from 'react'
 import { Player } from '../../../../utils/interfaces/player'
-import { AUTHOR_ID } from '../../../../utils/constants/author'
 import { usePlayersContext } from '../../../../context/players-context/players-context'
 
-const emptyPlayer: Player = {
-  id: 0,
-  attack: 55,
-  defense: 55,
-  firstName: '',
-  idAuthor: AUTHOR_ID!,
-  idPosition: 0,
-  image: '',
-  lastName: '',
-  skills: 55
-}
-
 const usePlayerForm = () => {
-  const [player, setPlayer] = useState<Player>(emptyPlayer)
-  const { positions, addPlayer } = usePlayersContext()
+  const { positions, addPlayer, activePlayer, updatePlayer, addActivePlayer } = usePlayersContext()
+  const [player, setPlayer] = useState<Player>(activePlayer)
 
   const isButtonEnabled = useMemo(() => {
     const { firstName, lastName, image, idPosition } = player
@@ -30,11 +17,16 @@ const usePlayerForm = () => {
         ...player,
         [key]: value
       })
+      addActivePlayer(player)
     }
   }
 
-  const registerPlayer = () => {
-    addPlayer(player)
+  const managePlayer = () => {
+    if (player.id === 0) {
+      addPlayer(player)
+    } else {
+      updatePlayer(player.id)
+    }
   }
 
   return {
@@ -42,7 +34,7 @@ const usePlayerForm = () => {
     isButtonEnabled,
     positions,
     handleChangeInput,
-    registerPlayer
+    managePlayer
   }
 }
 

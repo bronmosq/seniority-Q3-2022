@@ -11,11 +11,13 @@ export interface PlayersStateContext {
   activeAlert: boolean
   alertMessage: string
   showLoadingOverlay: boolean
+  activePlayer: Player
   handleChangeModal?: () => void
   handleCloseAlert?: () => void
   deletePlayer: (id: number) => void
   addPlayer: (player: Player) => void
-  // updatePlayer: (id: number) => void
+  updatePlayer: (id: number) => void
+  addActivePlayer: (player: Player) => void
 }
 
 export interface PlayersProviderProps {
