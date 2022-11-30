@@ -26,7 +26,7 @@ export const addPlayer = async (player: Player) => {
   return response.data
 }
 
-export const updatePlayer = async (id: number, player: Player) => {
+export const updatePlayer = async (player: Player) => {
   console.log('llega el player', player)
-  await axios.patch(`${API_URL}/player/${id}`, player)
+  await axios.patch(`${API_URL}/player/${player.id}`, player)
 }

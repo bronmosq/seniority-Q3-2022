@@ -16,8 +16,9 @@ export interface PlayersStateContext {
   handleCloseAlert?: () => void
   deletePlayer: (id: number) => void
   addPlayer: (player: Player) => void
-  // updatePlayer: (id: number) => void
-  addActivePlayer: (player: Player) => void
+  updatePlayer: (player: Player) => void
+  addActivePlayer: (id: number) => void
+  isEditing: boolean
 }
 
 export interface PlayersProviderProps {

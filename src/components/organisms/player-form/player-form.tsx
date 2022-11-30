@@ -10,8 +10,10 @@ import usePlayerForm from './use-player-form/use-player-form'
 import { Button } from '../../atoms/button/button'
 import { usePlayersContext } from '../../../context/players-context/players-context'
 
-const RegisterForm: FC = () => {
-  const { handleChangeInput, player, positions, registerPlayer, isButtonEnabled } = usePlayerForm()
+const PlayerForm: FC = () => {
+  const { handleChangeInput, player, positions, isButtonEnabled, managePlayer } = usePlayerForm()
+  const { isEditing } = usePlayersContext()
+
   return (
     <div className="player-form">
       <div className="player-form__image-column">
@@ -82,8 +84,8 @@ const RegisterForm: FC = () => {
             name="skills"
           />
           <div className="player-form__button-wrapper">
-            <Button disabled={!isButtonEnabled} onClick={registerPlayer}>
-              Agregar
+            <Button disabled={!isButtonEnabled} onClick={managePlayer}>
+              {isEditing ? InfoText.EDIT_PLAYER_MODAL_BUTTON : InfoText.ADD_PLAYER_MODAL_BUTTON}
             </Button>
           </div>
         </div>
@@ -92,4 +94,4 @@ const RegisterForm: FC = () => {
   )
 }
 
-export default RegisterForm
+export default PlayerForm

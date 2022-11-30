@@ -17,8 +17,13 @@ const usePlayers = () => {
   const [alertMessage, setAlertMessage] = useState('')
   const [showLoadingOverlay, setShowLoadingOverlay] = useState(false)
   const [activePlayer, setActivePlayer] = useState<Player>(EMPTY_PLAYER)
+  const [isEditing, setIsEditing] = useState(false)
 
   const handleChangeModal = () => {
+    if (activeModal) {
+      setActivePlayer(EMPTY_PLAYER)
+      setIsEditing(false)
+    }
     setActiveModal(!activeModal)
   }
 
@@ -70,8 +75,24 @@ const usePlayers = () => {
     handleChangeModal()
   }
 
-  const addActivePlayer = async (player: Player) => {
-    setActivePlayer(player)
+  const addActivePlayer = (id: number) => {
+    const player = playersList.find(({ id: playerId }) => playerId === id)
+    setIsEditing(true)
+    setActivePlayer(player!)
+    handleChangeModal()
+  }
+
+  const updatePlayer = async (editedPlayer: Player) => {
+    // const player = playersList.find(({ id: playerId }) => playerId === id)
+    // setActivePlayer(player!)
+    // handleChangeModal()
+    await updatePlayerService(editedPlayer!).then(() => {
+      handleChangeModal()
+      showAlert('Se modifico al jugador')
+      getPlayers()
+    })
+    // console.log(player)
+    console.log('entro')
   }
 
   // const updatePlayer = async (id: number) => {
@@ -96,8 +117,9 @@ const usePlayers = () => {
     deletePlayer,
     handleCloseAlert,
     addPlayer,
-    // updatePlayer,
-    addActivePlayer
+    updatePlayer,
+    addActivePlayer,
+    isEditing
   }
 }
 

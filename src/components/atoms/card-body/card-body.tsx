@@ -2,8 +2,8 @@ import { FC } from 'react'
 import { Button } from '../button/button'
 import DeleteIcon from '../../../assets/delete-icon.svg'
 import EditIcon from '../../../assets/edit-icon.svg'
-import './card-body.scss'
 import { usePlayersContext } from '../../../context/players-context/players-context'
+import './card-body.scss'
 
 export interface CardBodyProps {
   attack: number
@@ -13,7 +13,7 @@ export interface CardBodyProps {
 }
 
 const CardBody: FC<CardBodyProps> = ({ attack, defense, skills, id }) => {
-  const { deletePlayer } = usePlayersContext()
+  const { deletePlayer, addActivePlayer } = usePlayersContext()
 
   return (
     <div className="card-body">
@@ -33,7 +33,7 @@ const CardBody: FC<CardBodyProps> = ({ attack, defense, skills, id }) => {
           </div>
         </div>
         <div className="card-body__buttons-wrapper">
-          <Button size="small">
+          <Button size="small" onClick={() => addActivePlayer(id)}>
             <img className="card-body__icon" src={EditIcon} alt="delete-icon" />
           </Button>
           <Button size="small" onClick={() => deletePlayer(id)}>
