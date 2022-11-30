@@ -10,6 +10,7 @@ export interface PlayersStateContext {
   activeModal: boolean
   activeAlert: boolean
   alertMessage: string
+  showLoadingOverlay: boolean
   handleChangeModal?: () => void
   handleCloseAlert?: () => void
   deletePlayer: (id: number) => void

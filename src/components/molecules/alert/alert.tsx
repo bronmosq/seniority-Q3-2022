@@ -10,16 +10,16 @@ interface AlertProps {
 }
 
 const Alert: FC<AlertProps> = ({ message, showAlert }) => {
-  // const { handleCloseAlert } = usePlayersContext()
+  const { handleCloseAlert } = usePlayersContext()
   return createPortal(
     <div className={`alert${!showAlert ? ' alert--hidden' : ''}`}>
       <span>{message}</span>
-      {/* <img
+      <img
         role="presentation"
         className="alert__close-icon"
         src={CloseIcon}
-        onClick={() => handleCloseAlert}
-      /> */}
+        onClick={handleCloseAlert}
+      />
     </div>,
     document.body
   )

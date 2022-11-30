@@ -6,31 +6,30 @@ import {
   addPlayer as addPlayerService
 } from '../../../services/player.service'
 import { Player, PlayerPosition } from '../../../utils/interfaces/player'
-import { PlayersStateContext } from '../players-context'
 
-const usePlayers = (initalValue?: Partial<PlayersStateContext>) => {
+const usePlayers = () => {
   const [activeModal, setActiveModal] = useState(false)
   const [playersList, setPlayersList] = useState<Player[]>([])
   const [positions, setPositions] = useState<PlayerPosition[]>([])
   const [activeAlert, setActiveAlert] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
+  const [showLoadingOverlay, setShowLoadingOverlay] = useState(false)
 
   const handleChangeModal = () => {
     setActiveModal(!activeModal)
   }
 
   const handleCloseAlert = () => {
-    setActiveModal(false)
+    setActiveAlert(false)
   }
 
   const getPlayers = async () => {
-    setAlertMessage('Cargando...')
-    setActiveAlert(true)
+    setShowLoadingOverlay(true)
     await fetchPlayers()
       .then((res) => {
         setTimeout(() => {
           setPlayersList(res)
-          setActiveAlert(false)
+          setShowLoadingOverlay(false)
         }, 1500)
       })
       .catch(() => setPlayersList([]))
@@ -45,12 +44,21 @@ const usePlayers = (initalValue?: Partial<PlayersStateContext>) => {
     getPositions()
   }, [])
 
+  const showAlert = (message: string) => {
+    setTimeout(() => {
+      setActiveAlert(true)
+      setAlertMessage(message)
+    }, 1500)
+  }
+
   const deletePlayer = async (id: number) => {
+    showAlert('Se elimino al jugador')
     await deletePlayerService(id)
     getPlayers()
   }
 
   const addPlayer = async (player: Player) => {
+    showAlert('Se agrego al jugador')
     await addPlayerService(player)
     getPlayers()
     handleChangeModal()
@@ -62,6 +70,7 @@ const usePlayers = (initalValue?: Partial<PlayersStateContext>) => {
     activeAlert,
     alertMessage,
     positions,
+    showLoadingOverlay,
     handleChangeModal,
     deletePlayer,
     handleCloseAlert,

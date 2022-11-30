@@ -1,6 +1,8 @@
 import './player-form.scss'
 import { FC } from 'react'
 import { DEFAULT_IMAGE } from '../../../utils/constants/player'
+import { InfoText } from '../../../utils/enums/info-text'
+
 import { Input } from '../../atoms/input/input'
 import Slider from '../../atoms/slider/slider'
 import Select from '../../atoms/select/select'
@@ -10,13 +12,13 @@ import { Button } from '../../atoms/button/button'
 const RegisterForm: FC = () => {
   const { handleChangeInput, player, positions, registerPlayer, isButtonEnabled } = usePlayerForm()
   return (
-    <div className="register-form">
-      <div className="register-form__image-column">
-        <img className="register-form__image" src={DEFAULT_IMAGE} />
+    <div className="player-form">
+      <div className="player-form__image-column">
+        <img className="player-form__image" src={DEFAULT_IMAGE} />
       </div>
-      <div className="register-form__content-column">
-        <div className="register-form__wrapper">
-          <div className="register-form__inputs-wrapper">
+      <div className="player-form__content-column">
+        <div className="player-form__wrapper">
+          <div className="player-form__inputs-wrapper">
             <div>
               <Input
                 label="Nombre"
@@ -24,33 +26,33 @@ const RegisterForm: FC = () => {
                 onChange={handleChangeInput}
                 value={player.firstName}
                 variant={player.firstName ? 'normal' : 'error'}
-                errorMessage={player.firstName ? '' : 'error'}
+                errorMessage={player.firstName ? '' : InfoText.FIRST_NAME_ERROR}
                 name="firstName"
               />
             </div>
-            <div className="register-form__input">
+            <div className="player-form__input">
               <Input
                 label="Apellido"
                 placeholder="Apellido"
                 onChange={handleChangeInput}
                 value={player.lastName}
                 variant={player.lastName ? 'normal' : 'error'}
-                errorMessage={player.lastName ? '' : 'error'}
+                errorMessage={player.lastName ? '' : InfoText.LAST_NAME_ERROR}
                 name="lastName"
               />
             </div>
-            <div className="register-form__input">
+            <div className="player-form__input">
               <Input
                 label="Imagen"
                 placeholder="Imagen"
                 onChange={handleChangeInput}
                 value={player.image}
                 variant={player.image ? 'normal' : 'error'}
-                errorMessage={player.image ? '' : 'error'}
+                errorMessage={player.image ? '' : InfoText.IMAGE_ERROR}
                 name="image"
               />
             </div>
-            <div className="register-form__input">
+            <div className="player-form__input">
               <Select
                 options={positions}
                 label="Posición"
@@ -78,7 +80,7 @@ const RegisterForm: FC = () => {
             onChange={handleChangeInput}
             name="skills"
           />
-          <div className="register-form__button-wrapper">
+          <div className="player-form__button-wrapper">
             <Button disabled={!isButtonEnabled} onClick={registerPlayer}>
               Agregar
             </Button>
