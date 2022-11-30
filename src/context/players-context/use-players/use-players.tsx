@@ -5,7 +5,7 @@ import {
   getPositions as getPositionsService,
   addPlayer as addPlayerService,
   updatePlayer as updatePlayerService
-} from '../../../services/player.service'
+} from '../../../services/player/player.service'
 import { Player, PlayerPosition } from '../../../utils/interfaces/player'
 import { EMPTY_PLAYER } from '../../../utils/constants/player'
 

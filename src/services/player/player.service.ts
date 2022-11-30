@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { AUTHOR_ID } from '../utils/constants/author'
-import { Player, PlayerPosition } from '../utils/interfaces/player'
+import { AUTHOR_ID } from '../../utils/constants/author'
+import { Player, PlayerPosition } from '../../utils/interfaces/player'
 
 const API_URL = 'https://api-exercise-q3.herokuapp.com'
 
@@ -27,6 +27,5 @@ export const addPlayer = async (player: Player) => {
 }
 
 export const updatePlayer = async (player: Player) => {
-  console.log('llega el player', player)
   await axios.patch(`${API_URL}/player/${player.id}`, player)
 }
