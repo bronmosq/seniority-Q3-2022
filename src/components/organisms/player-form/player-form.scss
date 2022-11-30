@@ -2,12 +2,28 @@
   display: flex;
   width: 100%;
   height: 85%;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+    overflow-y: scroll;
+    height: 90%;
+    padding: 0 1rem;
+  }
+
   &__image-column {
     width: 40%;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+      height: 300px;
+    }
   }
   &__content-column {
     width: 60%;
     padding-left: 2rem;
+    @media screen and (max-width: 900px) {
+      width: 88%;
+      padding-left: unset;
+    }
   }
 
   &__button-wrapper {
@@ -26,9 +42,16 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    @media screen and (max-width: 900px) {
+      flex-direction: column;
+    }
   }
   &__input {
     width: 45%;
     margin-right: 20px;
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      margin-right: unset;
+    }
   }
 }

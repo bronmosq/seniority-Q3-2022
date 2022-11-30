@@ -26,6 +26,10 @@
     background-color: white;
     border-radius: 4px;
     padding: 2rem;
+    @media screen and (max-width: 900px) {
+      width: 100vw;
+      height: 100vh;
+    }
   }
 
   &__top-content {
