@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react'
 import { Player } from '../../../../utils/interfaces/player'
-import { usePlayersContext } from '../../../../context/players-context/players-context'
+import { PlayerFormProps } from '../player-form'
+import { EMPTY_PLAYER } from '../../../../utils/constants/player'
 
-const usePlayerForm = () => {
-  const { positions, activePlayer, isEditing, addPlayer, updatePlayer } = usePlayersContext()
-  const [player, setPlayer] = useState<Player>(activePlayer)
+const usePlayerForm = ({ initialValues, onSubmit }: PlayerFormProps) => {
+  const [player, setPlayer] = useState<Player>(initialValues || EMPTY_PLAYER)
 
   const isButtonEnabled = useMemo(() => {
     const { firstName, lastName, image, idPosition } = player
@@ -21,17 +21,12 @@ const usePlayerForm = () => {
   }
 
   const managePlayer = () => {
-    if (!isEditing) {
-      addPlayer(player)
-    } else {
-      updatePlayer(player)
-    }
+    onSubmit(player)
   }
 
   return {
     player,
     isButtonEnabled,
-    positions,
     handleChangeInput,
     managePlayer
   }

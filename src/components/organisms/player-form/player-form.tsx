@@ -9,9 +9,16 @@ import Select from '../../atoms/select/select'
 import usePlayerForm from './use-player-form/use-player-form'
 import { Button } from '../../atoms/button/button'
 import { usePlayersContext } from '../../../context/players-context/players-context'
+import { Player, PlayerPosition } from '../../../utils/interfaces/player'
 
-const PlayerForm: FC = () => {
-  const { handleChangeInput, player, positions, isButtonEnabled, managePlayer } = usePlayerForm()
+export interface PlayerFormProps {
+  initialValues?: Player
+  onSubmit: (player: Player) => void
+  positions: PlayerPosition[]
+}
+
+const PlayerForm: FC<PlayerFormProps> = (props) => {
+  const { handleChangeInput, player, isButtonEnabled, managePlayer } = usePlayerForm(props)
   const { isEditing } = usePlayersContext()
 
   return (
@@ -57,7 +64,7 @@ const PlayerForm: FC = () => {
             </div>
             <div className="player-form__input">
               <Select
-                options={positions}
+                options={props.positions}
                 label="Posición"
                 name="idPosition"
                 onChange={handleChangeInput}
