@@ -1,6 +1,22 @@
 .cards-grid {
-  display: grid;
-  grid-template-columns: [x0] 1fr [x1] 1fr [x2] 1fr [x3];
-  gap: 20px;
-  padding: 2rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+
+  &__item {
+    width: 31.333%;
+
+    @media screen and (max-width: 900px) {
+      width: 48%;
+    }
+
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
 }

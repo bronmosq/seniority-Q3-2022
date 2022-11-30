@@ -8,7 +8,9 @@ export const CardsGrid = () => {
   return (
     <div className="cards-grid">
       {playersList.map((player, index) => (
-        <Card key={`player-card-${index}`} {...player} />
+        <div className="cards-grid__item">
+          <Card key={`player-card-${index}`} {...player} />
+        </div>
       ))}
     </div>
   )

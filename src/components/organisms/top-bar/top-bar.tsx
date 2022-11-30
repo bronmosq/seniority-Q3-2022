@@ -4,7 +4,7 @@ import { Input } from '../../atoms/input/input'
 import Modal from '../../molecules/modal/modal'
 import './top-bar.scss'
 import { InfoText } from '../../../utils/enums/info-text'
-import RegisterForm from '../register-form/register-form'
+import RegisterForm from '../player-form/player-form'
 import { usePlayersContext } from '../../../context/players-context/players-context'
 
 const TopBar = () => {
@@ -13,14 +13,10 @@ const TopBar = () => {
   return (
     <>
       <div className="top-bar">
-        <Input placeholder="Buscar por nombre" name="search" />
+        <Input placeholder="Buscar por nombre" onChange={() => {}} />
         <Button onClick={handleChangeModal}>Agregar</Button>
       </div>
-      <Modal
-        title={InfoText.REGISTER_TITLE}
-        showModal={activeModal}
-        handleShowModal={() => handleChangeModal()}
-      >
+      <Modal title={InfoText.REGISTER_TITLE} showModal={activeModal}>
         <RegisterForm />
       </Modal>
     </>

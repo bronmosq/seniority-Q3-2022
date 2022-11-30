@@ -1,0 +1,92 @@
+import './player-form.scss'
+import { FC } from 'react'
+import { DEFAULT_IMAGE } from '../../../utils/constants/player'
+import { Input } from '../../atoms/input/input'
+import Slider from '../../atoms/slider/slider'
+import Select from '../../atoms/select/select'
+import usePlayerForm from './use-player-form/use-player-form'
+import { Button } from '../../atoms/button/button'
+
+const RegisterForm: FC = () => {
+  const { handleChangeInput, player, positions, registerPlayer, isButtonEnabled } = usePlayerForm()
+  return (
+    <div className="register-form">
+      <div className="register-form__image-column">
+        <img className="register-form__image" src={DEFAULT_IMAGE} />
+      </div>
+      <div className="register-form__content-column">
+        <div className="register-form__wrapper">
+          <div className="register-form__inputs-wrapper">
+            <div>
+              <Input
+                label="Nombre"
+                placeholder="Nombre"
+                onChange={handleChangeInput}
+                value={player.firstName}
+                variant={player.firstName ? 'normal' : 'error'}
+                errorMessage={player.firstName ? '' : 'error'}
+                name="firstName"
+              />
+            </div>
+            <div className="register-form__input">
+              <Input
+                label="Apellido"
+                placeholder="Apellido"
+                onChange={handleChangeInput}
+                value={player.lastName}
+                variant={player.lastName ? 'normal' : 'error'}
+                errorMessage={player.lastName ? '' : 'error'}
+                name="lastName"
+              />
+            </div>
+            <div className="register-form__input">
+              <Input
+                label="Imagen"
+                placeholder="Imagen"
+                onChange={handleChangeInput}
+                value={player.image}
+                variant={player.image ? 'normal' : 'error'}
+                errorMessage={player.image ? '' : 'error'}
+                name="image"
+              />
+            </div>
+            <div className="register-form__input">
+              <Select
+                options={positions}
+                label="Posición"
+                name="idPosition"
+                onChange={handleChangeInput}
+                selectedValue={player.idPosition}
+              />
+            </div>
+          </div>
+          <Slider
+            label="Ataque"
+            defaultValue={player.attack}
+            onChange={handleChangeInput}
+            name="attack"
+          />
+          <Slider
+            label="Defensa"
+            defaultValue={player.defense}
+            onChange={handleChangeInput}
+            name="defense"
+          />
+          <Slider
+            label="Skills"
+            defaultValue={player.skills}
+            onChange={handleChangeInput}
+            name="skills"
+          />
+          <div className="register-form__button-wrapper">
+            <Button disabled={!isButtonEnabled} onClick={registerPlayer}>
+              Agregar
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default RegisterForm

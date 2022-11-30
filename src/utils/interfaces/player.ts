@@ -9,3 +9,8 @@ export interface Player {
   idAuthor: number | string
   idPosition: number
 }
+
+export interface PlayerPosition {
+  id: number
+  description: string
+}

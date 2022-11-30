@@ -5,11 +5,21 @@ export interface ButtonProps {
   onClick?: () => void
   children?: React.ReactNode
   size?: 'small' | 'large'
+  disabled?: boolean
 }
 
-export const Button: FC<ButtonProps> = ({ onClick = () => {}, children, size }) => {
+export const Button: FC<ButtonProps> = ({
+  onClick = () => {},
+  children,
+  size,
+  disabled = false
+}) => {
   return (
-    <button className={`button ${size === 'small' && ' button--small'}`} onClick={() => onClick()}>
+    <button
+      disabled={disabled}
+      className={`button ${size === 'small' && ' button--small'}`}
+      onClick={() => onClick()}
+    >
       {children}
     </button>
   )

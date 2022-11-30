@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { AUTHOR_ID } from '../utils/constants/author'
-import { Player } from '../utils/interfaces/player'
+import { Player, PlayerPosition } from '../utils/interfaces/player'
 
 const API_URL = 'https://api-exercise-q3.herokuapp.com'
 
@@ -13,10 +13,15 @@ export const fetchPlayers = async () => {
 }
 
 export const deletePlayer = async (id: number) => {
-  try {
-    await axios.delete(`${API_URL}/player/${id}`)
-    return true
-  } catch (error) {
-    return false
-  }
+  await axios.delete(`${API_URL}/player/${id}`)
+}
+
+export const getPositions = async () => {
+  const response = await axios.get<PlayerPosition[]>(`${API_URL}/position`)
+  return response.data
+}
+
+export const addPlayer = async (player: Player) => {
+  const response = await axios.post<Player>(`${API_URL}/player`, player)
+  return response.data
 }
