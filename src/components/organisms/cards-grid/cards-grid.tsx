@@ -3,11 +3,12 @@ import './cards-grid.scss'
 import { usePlayersContext } from '../../../context/players-context/players-context'
 
 export const CardsGrid = () => {
-  const { playersList } = usePlayersContext()
+  const { filteredList, playersList } = usePlayersContext()
+  const list = filteredList ?? playersList
 
   return (
     <div className="cards-grid">
-      {playersList.map((player, index) => (
+      {list.map((player, index) => (
         <div key={`card-item-${index}`} className="cards-grid__item">
           <Card key={`player-card-${index}`} {...player} />
         </div>

@@ -1,24 +1,24 @@
 import { createContext, FC, useContext } from 'react'
-import { DEFAULT_IMAGE } from '../../utils/constants/player'
 import { Player, PlayerPosition } from '../../utils/interfaces/player'
 import usePlayers from './use-players/use-players'
-import { addPlayer } from '../../services/player.service'
 
 export interface PlayersStateContext {
   playersList: Player[]
+  filteredList: Player[]
   positions: PlayerPosition[]
   activeModal: boolean
   activeAlert: boolean
   alertMessage: string
   showLoadingOverlay: boolean
   activePlayer: Player
+  isEditing: boolean
   handleChangeModal?: () => void
   handleCloseAlert?: () => void
   deletePlayer: (id: number) => void
   addPlayer: (player: Player) => void
   updatePlayer: (player: Player) => void
   addActivePlayer: (id: number) => void
-  isEditing: boolean
+  addFilteredPlayerList: (players: Player[]) => void
 }
 
 export interface PlayersProviderProps {

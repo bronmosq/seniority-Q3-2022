@@ -18,6 +18,7 @@ const usePlayers = () => {
   const [showLoadingOverlay, setShowLoadingOverlay] = useState(false)
   const [activePlayer, setActivePlayer] = useState<Player>(EMPTY_PLAYER)
   const [isEditing, setIsEditing] = useState(false)
+  const [filteredList, setFilteredList] = useState<Player[]>([])
 
   const handleChangeModal = () => {
     if (activeModal) {
@@ -37,10 +38,15 @@ const usePlayers = () => {
       .then((res) => {
         setTimeout(() => {
           setPlayersList(res)
+          setFilteredList(res)
           setShowLoadingOverlay(false)
         }, 1500)
       })
       .catch(() => setPlayersList([]))
+  }
+
+  const addFilteredPlayerList = (players: Player[]) => {
+    setFilteredList(players)
   }
 
   const getPositions = async () => {
@@ -83,27 +89,12 @@ const usePlayers = () => {
   }
 
   const updatePlayer = async (editedPlayer: Player) => {
-    // const player = playersList.find(({ id: playerId }) => playerId === id)
-    // setActivePlayer(player!)
-    // handleChangeModal()
     await updatePlayerService(editedPlayer!).then(() => {
       handleChangeModal()
       showAlert('Se modifico al jugador')
       getPlayers()
     })
-    // console.log(player)
-    console.log('entro')
   }
-
-  // const updatePlayer = async (id: number) => {
-  //   handleChangeModal()
-  //   const player = playersList.find(({ id: playerId }) => playerId === id)
-  //   setActivePlayer(player!)
-  //   await updatePlayerService(id, activePlayer)
-  //   showAlert('Se modifico al jugador')
-  //   getPlayers()
-  //   // getPlayers()
-  // }
 
   return {
     playersList,
@@ -113,13 +104,15 @@ const usePlayers = () => {
     positions,
     showLoadingOverlay,
     activePlayer,
+    isEditing,
+    filteredList,
     handleChangeModal,
     deletePlayer,
     handleCloseAlert,
     addPlayer,
     updatePlayer,
     addActivePlayer,
-    isEditing
+    addFilteredPlayerList
   }
 }
 
