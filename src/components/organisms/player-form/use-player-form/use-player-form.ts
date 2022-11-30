@@ -3,7 +3,7 @@ import { Player } from '../../../../utils/interfaces/player'
 import { usePlayersContext } from '../../../../context/players-context/players-context'
 
 const usePlayerForm = () => {
-  const { positions, addPlayer, activePlayer, updatePlayer, addActivePlayer } = usePlayersContext()
+  const { positions, addPlayer, activePlayer, addActivePlayer } = usePlayersContext()
   const [player, setPlayer] = useState<Player>(activePlayer)
 
   const isButtonEnabled = useMemo(() => {
@@ -17,16 +17,11 @@ const usePlayerForm = () => {
         ...player,
         [key]: value
       })
-      addActivePlayer(player)
     }
   }
 
-  const managePlayer = () => {
-    if (player.id === 0) {
-      addPlayer(player)
-    } else {
-      updatePlayer(player.id)
-    }
+  const registerPlayer = () => {
+    addPlayer(player)
   }
 
   return {
@@ -34,7 +29,7 @@ const usePlayerForm = () => {
     isButtonEnabled,
     positions,
     handleChangeInput,
-    managePlayer
+    registerPlayer
   }
 }
 

@@ -13,7 +13,7 @@ export interface CardBodyProps {
 }
 
 const CardBody: FC<CardBodyProps> = ({ attack, defense, skills, id }) => {
-  const { deletePlayer, updatePlayer } = usePlayersContext()
+  const { deletePlayer } = usePlayersContext()
 
   return (
     <div className="card-body">
@@ -33,7 +33,7 @@ const CardBody: FC<CardBodyProps> = ({ attack, defense, skills, id }) => {
           </div>
         </div>
         <div className="card-body__buttons-wrapper">
-          <Button size="small" onClick={() => updatePlayer(id)}>
+          <Button size="small">
             <img className="card-body__icon" src={EditIcon} alt="delete-icon" />
           </Button>
           <Button size="small" onClick={() => deletePlayer(id)}>

@@ -12,5 +12,5 @@ export const EMPTY_PLAYER: Player = {
   defense: 55,
   skills: 50,
   idAuthor: AUTHOR_ID!,
-  idPosition: 0
+  idPosition: 1
 }

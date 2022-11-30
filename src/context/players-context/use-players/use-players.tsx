@@ -74,15 +74,15 @@ const usePlayers = () => {
     setActivePlayer(player)
   }
 
-  const updatePlayer = async (id: number) => {
-    handleChangeModal()
-    const player = playersList.find(({ id: playerId }) => playerId === id)
-    setActivePlayer(player!)
-    await updatePlayerService(id, activePlayer)
-    showAlert('Se modifico al jugador')
-    getPlayers()
-    // getPlayers()
-  }
+  // const updatePlayer = async (id: number) => {
+  //   handleChangeModal()
+  //   const player = playersList.find(({ id: playerId }) => playerId === id)
+  //   setActivePlayer(player!)
+  //   await updatePlayerService(id, activePlayer)
+  //   showAlert('Se modifico al jugador')
+  //   getPlayers()
+  //   // getPlayers()
+  // }
 
   return {
     playersList,
@@ -96,7 +96,7 @@ const usePlayers = () => {
     deletePlayer,
     handleCloseAlert,
     addPlayer,
-    updatePlayer,
+    // updatePlayer,
     addActivePlayer
   }
 }

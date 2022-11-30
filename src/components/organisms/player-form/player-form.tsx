@@ -11,7 +11,7 @@ import { Button } from '../../atoms/button/button'
 import { usePlayersContext } from '../../../context/players-context/players-context'
 
 const RegisterForm: FC = () => {
-  const { handleChangeInput, player, positions, managePlayer, isButtonEnabled } = usePlayerForm()
+  const { handleChangeInput, player, positions, registerPlayer, isButtonEnabled } = usePlayerForm()
   return (
     <div className="player-form">
       <div className="player-form__image-column">
@@ -82,7 +82,7 @@ const RegisterForm: FC = () => {
             name="skills"
           />
           <div className="player-form__button-wrapper">
-            <Button disabled={!isButtonEnabled} onClick={managePlayer}>
+            <Button disabled={!isButtonEnabled} onClick={registerPlayer}>
               Agregar
             </Button>
           </div>

@@ -16,7 +16,7 @@ export interface PlayersStateContext {
   handleCloseAlert?: () => void
   deletePlayer: (id: number) => void
   addPlayer: (player: Player) => void
-  updatePlayer: (id: number) => void
+  // updatePlayer: (id: number) => void
   addActivePlayer: (player: Player) => void
 }
 
