@@ -1,5 +1,5 @@
 import './app.scss'
-import Team from './components/pages/team'
+import Team from './components/pages/team/team'
 import Alert from './components/molecules/alert/alert'
 import { usePlayersContext } from './context/players-context/players-context'
 import LoadingOverlay from './components/molecules/loading-overlay/loading-overlay'

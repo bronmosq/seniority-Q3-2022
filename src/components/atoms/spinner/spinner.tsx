@@ -2,7 +2,7 @@ import './spinner.scss'
 
 const Spinner = () => {
   return (
-    <div className="lds-ellipsis">
+    <div className="spinner">
       <div></div>
       <div></div>
       <div></div>
