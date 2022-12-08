@@ -7,7 +7,7 @@ import {
   updatePlayer as updatePlayerService
 } from '../../../services/player/player.service'
 import { Player, PlayerPosition } from '../../../utils/interfaces/player'
-import { EMPTY_PLAYER } from '../../../utils/constants/player'
+import { EMPTY_PLAYER, DEFAULT_POSITIONS } from '../../../utils/constants/player'
 
 const usePlayers = () => {
   const [activeModal, setActiveModal] = useState(false)
@@ -42,7 +42,9 @@ const usePlayers = () => {
           setShowLoadingOverlay(false)
         }, 1500)
       })
-      .catch(() => setPlayersList([]))
+      .catch(() => {
+        setShowLoadingOverlay(false)
+      })
   }
 
   const addFilteredPlayerList = (players: Player[]) => {
@@ -50,7 +52,9 @@ const usePlayers = () => {
   }
 
   const getPositions = async () => {
-    await getPositionsService().then((res) => setPositions(res))
+    await getPositionsService()
+      .then((res) => setPositions(res))
+      .catch(() => setPositions(DEFAULT_POSITIONS))
   }
 
   useEffect(() => {
@@ -69,15 +73,28 @@ const usePlayers = () => {
   }
 
   const deletePlayer = async (id: number) => {
-    showAlert('Se elimino al jugador')
-    await deletePlayerService(id)
-    getPlayers()
+    deletePlayerService(id)
+      .then(() => {
+        showAlert('Se elimino al jugador')
+        getPlayers()
+      })
+      .catch(() => {
+        console.log('entro aca')
+        const newList = playersList.filter((player) => player.id !== id)
+        setPlayersList(newList)
+        setFilteredList(newList)
+      })
   }
 
   const addPlayer = async (player: Player) => {
-    showAlert('Se agrego al jugador')
-    await addPlayerService(player)
-    getPlayers()
+    addPlayerService(player)
+      .then(() => showAlert('Se agrego al jugador'))
+      .catch(() => {
+        delete player.id
+        const newPlayer = { id: Math.floor(Math.random() * 200), ...player }
+        setPlayersList([...playersList, newPlayer])
+        setFilteredList([...playersList, newPlayer])
+      })
     handleChangeModal()
   }
 
@@ -89,11 +106,24 @@ const usePlayers = () => {
   }
 
   const updatePlayer = async (editedPlayer: Player) => {
-    await updatePlayerService(editedPlayer!).then(() => {
-      handleChangeModal()
-      showAlert('Se modifico al jugador')
-      getPlayers()
-    })
+    updatePlayerService(editedPlayer!)
+      .then(() => {
+        handleChangeModal()
+        showAlert('Se modifico al jugador')
+        getPlayers()
+      })
+      .catch(() => {
+        handleChangeModal()
+        const newList = playersList.map((player) => {
+          if (player.id === editedPlayer.id) {
+            return editedPlayer
+          }
+          return player
+        })
+        setPlayersList(newList)
+        setFilteredList(newList)
+        getPlayers()
+      })
   }
 
   return {

@@ -10,6 +10,7 @@ export interface InputProps {
   variant?: 'error' | 'normal'
   value?: string
   name?: keyof Player
+  disabled?: boolean
   onChange: (value: string, name?: keyof Player) => void
 }
 
@@ -21,12 +22,14 @@ export const Input: FC<InputProps> = ({
   variant,
   onChange,
   value,
-  name
+  name,
+  disabled = false
 }) => {
   return (
     <div className="input">
       <label htmlFor={name}>{label}</label>
       <input
+        disabled={disabled}
         name={name}
         id={name}
         onChange={onChange ? (e) => onChange(e.target.value, name) : undefined}

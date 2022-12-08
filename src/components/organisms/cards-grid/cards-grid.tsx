@@ -6,6 +6,8 @@ export const CardsGrid = () => {
   const { filteredList, playersList } = usePlayersContext()
   const list = filteredList ?? playersList
 
+  if (filteredList.length === 0) return <p>No existen jugadores</p>
+
   return (
     <div className="cards-grid">
       {list.map((player, index) => (

@@ -5,12 +5,16 @@ import { usePlayersContext } from '../../../context/players-context/players-cont
 import useSearchPlayers from '../../../hooks/use-search-player/use-search-player'
 
 const TopBar = () => {
-  const { handleChangeModal } = usePlayersContext()
+  const { handleChangeModal, playersList } = usePlayersContext()
   const { filterPlayers } = useSearchPlayers()
   return (
     <>
       <div className="top-bar">
-        <Input placeholder="Buscar por nombre" onChange={filterPlayers} />
+        <Input
+          disabled={playersList.length === 0}
+          placeholder="Buscar por nombre"
+          onChange={filterPlayers}
+        />
         <Button onClick={handleChangeModal}>Agregar</Button>
       </div>
     </>

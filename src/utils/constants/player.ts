@@ -1,3 +1,4 @@
+import { PlayerPosition } from './../interfaces/player'
 import { AUTHOR_ID } from './author'
 import { Player } from '../interfaces/player'
 export const DEFAULT_IMAGE =
@@ -14,3 +15,9 @@ export const EMPTY_PLAYER: Player = {
   idAuthor: AUTHOR_ID!,
   idPosition: 1
 }
+
+export const DEFAULT_POSITIONS: PlayerPosition[] = [
+  { id: 1, description: 'Portero' },
+  { id: 2, description: 'Delantero' },
+  { id: 3, description: 'Defensa' }
+]
