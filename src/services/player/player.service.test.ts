@@ -1,28 +1,88 @@
+import { Player } from './../../utils/interfaces/player'
 import axios from 'axios'
-// import MockAdapter from 'axios-mock-adapter'
-// import { Player } from '../utils/interfaces/player'
-// import { PlayersService } from './player.service'
+import { getPositions, fetchPlayers, addPlayer, deletePlayer, updatePlayer } from './player.service'
 
-// const axiosMock = new MockAdapter(axios)
+jest.mock('axios')
+const mockAxios = axios as jest.Mocked<typeof axios>
 
-// describe('User Service', () => {
-//   it('should get navigation properties', async () => {
-//     axiosMock.onGet().reply(200, [
-//       {
-//         id: 54,
-//         firstName: 'Cristiano',
-//         lastName: 'Ronaldo',
-//         image:
-//           'https://phantom-marca.unidadeditorial.es/500be06c4056e00a9f691d6c5800f216/resize/1320/f/jpg/assets/multimedia/imagenes/2022/09/30/16644896975046.jpg',
-//         attack: 99,
-//         defense: 99,
-//         skills: 99,
-//         idAuthor: 54,
-//         idPosition: 1
-//       }
-//     ] as Player[])
-//     const players = await PlayersService.getPlayers()
-//     expect(players).toBeDefined()
-//     expect(players).toBeInstanceOf(Array)
-//   })
-// })
+describe('PlayersService', () => {
+  it('should return players', async () => {
+    const players: Player[] = [
+      {
+        id: 1,
+        firstName: 'John',
+        lastName: 'Doe',
+        image: 'https://www.google.com',
+        attack: 1,
+        defense: 1,
+        skills: 1,
+        idAuthor: 1,
+        idPosition: 1
+      }
+    ]
+
+    mockAxios.get.mockResolvedValue({ data: players })
+
+    const playersResponse = await fetchPlayers()
+
+    expect(playersResponse).toEqual(players)
+  })
+
+  it('should return player when createPlayer is called', async () => {
+    const player: Player = {
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
+      image: 'https://www.google.com',
+      attack: 1,
+      defense: 1,
+      skills: 1,
+      idAuthor: 1,
+      idPosition: 1
+    }
+
+    mockAxios.post.mockResolvedValue({ data: player })
+    const playerResponse = await addPlayer(player)
+    expect(playerResponse).toEqual(player)
+  })
+
+  it('should get player positions when getPositions is called', async () => {
+    const positions = ['Goalkeeper', 'Defender', 'Midfielder', 'Forward']
+
+    mockAxios.get.mockResolvedValue({ data: positions })
+
+    const positionsResponse = await getPositions()
+
+    expect(positionsResponse).toEqual(positions)
+  })
+
+  it('should delete player when deletePlayer is called', async () => {
+    mockAxios.delete.mockResolvedValue({ data: {} })
+
+    const playerResponse = await deletePlayer(161)
+
+    // expect(playerResponse).toEqual(true)
+  })
+
+  it('should return status true when updatePlayer is called', async () => {
+    mockAxios.patch.mockResolvedValue({
+      data: {
+        status: true
+      }
+    })
+
+    const playerResponse = await updatePlayer({
+      firstName: 'John',
+      lastName: 'Doe',
+      image: 'https://www.google.com',
+      attack: 1,
+      defense: 1,
+      skills: 1,
+      idAuthor: 42,
+      idPosition: 1,
+      id: 184
+    })
+
+    // expect(playerResponse).toEqual(true)
+  })
+})

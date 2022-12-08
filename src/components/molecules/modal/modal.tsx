@@ -19,7 +19,7 @@ const Modal: FC<ModalProps> = ({ title, showModal, children, handleChangeModal }
           <h2>{title}</h2>
           <img onClick={handleChangeModal} className="modal__close-icon" src={CloseIcon} />
         </div>
-        <div className="modal__content">{children}</div>
+        {showModal && <div className="modal__content">{children}</div>}
       </div>
     </div>,
     document.body
