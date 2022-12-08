@@ -32,7 +32,7 @@ export const Input: FC<InputProps> = ({
         disabled={disabled}
         name={name}
         id={name}
-        onChange={onChange ? (e) => onChange(e.target.value, name) : undefined}
+        onChange={(e) => onChange(e.target.value, name)}
         className={`input__field ${variant === 'error' ? 'input__field--error' : ''}`}
         value={value}
         type={type}

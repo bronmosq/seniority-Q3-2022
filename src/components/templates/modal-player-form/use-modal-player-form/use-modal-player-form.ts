@@ -2,8 +2,15 @@ import { usePlayersContext } from '../../../../context/players-context/players-c
 import { Player } from '../../../../utils/interfaces/player'
 
 const useModalPlayerForm = () => {
-  const { isEditing, activeModal, positions, addPlayer, updatePlayer, activePlayer } =
-    usePlayersContext()
+  const {
+    isEditing,
+    activeModal,
+    positions,
+    addPlayer,
+    updatePlayer,
+    activePlayer,
+    handleChangeModal
+  } = usePlayersContext()
 
   const onSubmit = (player: Player) => {
     if (isEditing) {
@@ -18,7 +25,8 @@ const useModalPlayerForm = () => {
     activeModal,
     positions,
     onSubmit,
-    activePlayer
+    activePlayer,
+    handleChangeModal
   }
 }
 

@@ -10,13 +10,7 @@ interface SelectProps {
   name?: keyof Player
 }
 
-export const Select: FC<SelectProps> = ({
-  selectedValue,
-  label = '',
-  options = [],
-  onChange,
-  name
-}) => {
+export const Select: FC<SelectProps> = ({ selectedValue, label = '', options, onChange, name }) => {
   return (
     <div className="select">
       <label htmlFor={name}>{label}</label>
@@ -29,7 +23,7 @@ export const Select: FC<SelectProps> = ({
           }
         }}
       >
-        {options.map((option) => (
+        {options?.map((option) => (
           <option selected={selectedValue === option.id} key={option.id} value={option.id}>
             {option.description}
           </option>

@@ -8,7 +8,7 @@ interface DeckListProps {
   setActivePlayer: (id: number) => void
 }
 const CardsGrid: FC<DeckListProps> = (props) => {
-  if (props.playersList.length === 0) return <p>No existen jugadores</p>
+  if (props.playersList.length === 0) return <h2>No existen jugadores registrados...</h2>
 
   return (
     <div className="cards-grid">

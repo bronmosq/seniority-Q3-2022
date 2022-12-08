@@ -5,6 +5,6 @@ describe('Spinner Component', () => {
   it('Shoul render a spinner', () => {
     const { container } = render(<Spinner />)
     const spinner = container.getElementsByClassName('spinner')
-    expect(spinner).toBeDefined()
+    expect(spinner).toHaveLength(1)
   })
 })
