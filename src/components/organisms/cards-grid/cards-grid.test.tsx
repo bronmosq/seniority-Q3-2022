@@ -29,14 +29,26 @@ describe('Cards Grid Component', () => {
     }
   ]
   it('should display the empty players message', () => {
-    render(<CardsGrid playersList={[]} deletePlayer={() => {}} setActivePlayer={() => {}} />)
+    render(
+      <CardsGrid
+        searchTerm=""
+        playersList={[]}
+        deletePlayer={() => {}}
+        setActivePlayer={() => {}}
+      />
+    )
     const message = screen.getByText(/no existen jugadores registrados/i)
     expect(message).toBeInTheDocument()
   })
 
   it('should display a list of two players', () => {
     render(
-      <CardsGrid playersList={playersList} deletePlayer={() => {}} setActivePlayer={() => {}} />
+      <CardsGrid
+        searchTerm=""
+        playersList={playersList}
+        deletePlayer={() => {}}
+        setActivePlayer={() => {}}
+      />
     )
     const cards = screen.getAllByAltText(/cristiano ronaldo/i)
     expect(cards).toHaveLength(2)

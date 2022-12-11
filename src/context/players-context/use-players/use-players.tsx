@@ -35,6 +35,10 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
     setIsEditing(!isEditing)
   }
 
+  const handleSearchTerm = (term: string) => {
+    setSearchTerm(term)
+  }
+
   const getPlayers = () => {
     setShowLoadingOverlay(true)
     fetchPlayers()
@@ -56,10 +60,8 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
   }
 
   useEffect(() => {
-    if (!initialValues?.positions || !initialValues?.playersList) {
-      getPositions()
-      getPlayers()
-    }
+    getPositions()
+    getPlayers()
   }, [])
 
   const addPlayer = (player: Player) => {
@@ -132,7 +134,8 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
     handleChangeModal,
     addActivePlayer,
     updatePlayer,
-    deletePlayer
+    deletePlayer,
+    handleSearchTerm
   }
 }
 

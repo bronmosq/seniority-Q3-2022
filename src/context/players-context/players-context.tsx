@@ -10,11 +10,12 @@ export interface PlayersStateContext {
   showLoadingOverlay: boolean
   activePlayer: Player | undefined
   isEditing: boolean
-  handleChangeModal?: () => void
-  deletePlayer?: (id: number) => void
-  addPlayer?: (player: Player) => void
-  updatePlayer?: (player: Player) => void
-  addActivePlayer?: (id: number) => void
+  handleChangeModal: () => void
+  deletePlayer: (id: number) => void
+  addPlayer: (player: Player) => void
+  updatePlayer: (player: Player) => void
+  addActivePlayer: (id: number) => void
+  handleSearchTerm: (searchTerm: string) => void
 }
 
 export interface PlayersProviderProps {

@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { debug } from 'console'
 import Spinner from './spinner'
 
 describe('Spinner Component', () => {

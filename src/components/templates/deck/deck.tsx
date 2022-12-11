@@ -2,7 +2,7 @@ import { usePlayersContext } from '../../../context/players-context/players-cont
 import LoadingOverlay from '../../molecules/loading-overlay/loading-overlay'
 import CardsGrid from '../../organisms/cards-grid/cards-grid'
 import TopBar from '../../organisms/top-bar/top-bar'
-import useSearchPlayers from './use-search/use-search-players'
+import useSearchPlayers from '../../organisms/cards-grid/use-filter-players/use-filter-players'
 
 const Deck = () => {
   const {
@@ -11,19 +11,21 @@ const Deck = () => {
     addActivePlayer,
     showLoadingOverlay,
     deletePlayer,
+    handleSearchTerm,
     searchTerm
   } = usePlayersContext()
-  const { filteredPlayersList, filterPlayers } = useSearchPlayers(playersList)
-  // const { filteredList, deletePlayer, addActivePlayer } = usePlayersContext()
+
   return (
     <div className="deck">
       <h1 className="deck__title">MI EQUIPO</h1>
       <TopBar
-        filterPlayers={filterPlayers}
+        searchTerm={searchTerm}
+        handleSearchTerm={handleSearchTerm}
         playersList={playersList}
         handleChangeModal={handleChangeModal!}
       />
       <CardsGrid
+        searchTerm={searchTerm}
         playersList={playersList}
         deletePlayer={deletePlayer!}
         setActivePlayer={addActivePlayer!}

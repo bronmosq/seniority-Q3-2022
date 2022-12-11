@@ -10,7 +10,8 @@ import './top-bar.scss'
 interface TopBarProps {
   handleChangeModal: () => void
   playersList: Player[]
-  filterPlayers: (term: string) => void
+  handleSearchTerm: (term: string) => void
+  searchTerm: string
 }
 
 const TopBar: FC<TopBarProps> = (props) => {
@@ -18,9 +19,10 @@ const TopBar: FC<TopBarProps> = (props) => {
     <>
       <div className="top-bar">
         <Input
+          value={props.searchTerm}
           disabled={props.playersList.length === 0}
           placeholder="Buscar por nombre"
-          onChange={props.filterPlayers}
+          onChange={props.handleSearchTerm}
         />
         <Button onClick={props.handleChangeModal}>Agregar</Button>
       </div>
