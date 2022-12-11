@@ -1,0 +1,86 @@
+.card {
+  border-radius: 20px;
+  background-color: var(--black-color);
+  color: white;
+  height: 450px;
+  overflow: hidden;
+
+  &__header {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+
+  &__image {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  &__info-wrapper {
+    position: absolute;
+    z-index: 3;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0)
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 6%,
+        rgba(255, 255, 255, 0.1) 15%,
+        rgba(255, 255, 255, 0.5) 41%,
+        rgba(255, 255, 255, 1) 77%
+      );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__player-name {
+    color: black;
+    width: 50%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  &__bottom-info {
+    height: 150px;
+    padding: 1rem;
+  }
+
+  &__stats-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__buttons-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+  }
+}

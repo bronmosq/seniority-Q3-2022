@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
+import { Player } from '../../../../utils/interfaces/player'
 
 export interface UseSliderArgs {
   value?: number
   defaultValue?: number
-  onChange?: (value: number) => void
+  onChange?: (value: number, name: keyof Player) => void
+  name?: keyof Player
 }
 
 const DEFAULT_VALUE = 55
@@ -18,7 +20,7 @@ function useSlider(args?: UseSliderArgs) {
   const handleCurrentValue = (valueTarget: string) => {
     const valueSlider = Number(valueTarget)
 
-    if (args?.onChange) args?.onChange(valueSlider)
+    if (args?.onChange) args?.onChange(valueSlider, args?.name || 'attack')
 
     setCurrentValue(valueSlider)
   }

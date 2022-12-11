@@ -41,6 +41,6 @@ describe('useSlider tests', () => {
       result.current.handleCurrentValue('11')
     })
 
-    expect(mockOnChange).toBeCalledWith(11)
+    expect(mockOnChange).toBeCalledWith(11, 'attack')
   })
 })
