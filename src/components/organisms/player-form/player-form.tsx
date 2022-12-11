@@ -20,7 +20,6 @@ export interface PlayerFormProps {
 
 const PlayerForm: FC<PlayerFormProps> = (props) => {
   const { handleChangeInput, player, isButtonEnabled, managePlayer } = usePlayerForm(props)
-  // const { isEditing } = usePlayersContext()
 
   return (
     <div className="player-form">

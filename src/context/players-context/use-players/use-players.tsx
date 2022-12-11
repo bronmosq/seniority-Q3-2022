@@ -6,17 +6,22 @@ import {
   updatePlayer as updatePlayerService,
   deletePlayer as deletePlayerService,
   getPositions as getPositionsService
-} from '../../../services/user.service'
+} from '../../../services/player/player.service'
 import { DEFAULT_POSITIONS } from '../../../utils/constants/player'
+import { PlayersProviderProps, PlayersStateContext } from '../players-context'
 
-const usePlayers = () => {
-  const [activeModal, setActiveModal] = useState(false)
-  const [playersList, setPlayersList] = useState<Player[]>([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [positions, setPositions] = useState<PlayerPosition[]>([])
-  const [isEditing, setIsEditing] = useState(false)
-  const [activePlayer, setActivePlayer] = useState<Player | undefined>(undefined)
-  const [showLoadingOverlay, setShowLoadingOverlay] = useState(false)
+const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
+  const [activeModal, setActiveModal] = useState(initialValues?.activeModal || false)
+  const [playersList, setPlayersList] = useState<Player[]>(initialValues?.playersList || [])
+  const [searchTerm, setSearchTerm] = useState(initialValues?.searchTerm || '')
+  const [positions, setPositions] = useState<PlayerPosition[]>(initialValues?.positions || [])
+  const [isEditing, setIsEditing] = useState(initialValues?.isEditing || false)
+  const [activePlayer, setActivePlayer] = useState<Player | undefined>(
+    initialValues?.activePlayer || undefined
+  )
+  const [showLoadingOverlay, setShowLoadingOverlay] = useState(
+    initialValues?.showLoadingOverlay || false
+  )
 
   const handleChangeModal = () => {
     if (isEditing) {
@@ -36,9 +41,11 @@ const usePlayers = () => {
       .then((res) => {
         setPlayersList(res)
         setShowLoadingOverlay(false)
+        setSearchTerm('')
       })
       .catch(() => {
         setShowLoadingOverlay(false)
+        setSearchTerm('')
       })
   }
 
@@ -49,8 +56,10 @@ const usePlayers = () => {
   }
 
   useEffect(() => {
-    getPlayers()
-    getPositions()
+    if (!initialValues?.positions || !initialValues?.playersList) {
+      getPositions()
+      getPlayers()
+    }
   }, [])
 
   const addPlayer = (player: Player) => {
@@ -58,11 +67,13 @@ const usePlayers = () => {
     addPlayerService(player)
       .then(() => {
         getPlayers()
+        setSearchTerm('')
       })
       .catch(() => {
         delete player.id
         const newPlayer = { id: Math.floor(Math.random() * 200), ...player }
         setPlayersList([...playersList, newPlayer])
+        setSearchTerm('')
       })
     handleChangeModal()
   }
@@ -79,11 +90,13 @@ const usePlayers = () => {
     deletePlayerService(id)
       .then(() => {
         getPlayers()
+        setSearchTerm('')
       })
       .catch(() => {
         const newList = playersList.filter((player) => player.id !== id)
         setPlayersList(newList)
         setShowLoadingOverlay(false)
+        setSearchTerm('')
       })
   }
 
@@ -92,6 +105,7 @@ const usePlayers = () => {
       .then(() => {
         handleChangeModal()
         getPlayers()
+        setSearchTerm('')
       })
       .catch(() => {
         handleChangeModal()
@@ -102,6 +116,7 @@ const usePlayers = () => {
           return player
         })
         setPlayersList(newList)
+        setSearchTerm('')
       })
   }
 

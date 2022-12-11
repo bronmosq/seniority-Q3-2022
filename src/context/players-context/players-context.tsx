@@ -19,7 +19,7 @@ export interface PlayersStateContext {
 
 export interface PlayersProviderProps {
   children: React.ReactNode
-  initialValue?: PlayersStateContext
+  initialValue?: Partial<PlayersStateContext>
 }
 
 export const PlayersContext = createContext<PlayersStateContext>(
@@ -28,7 +28,7 @@ export const PlayersContext = createContext<PlayersStateContext>(
 
 export const usePlayersContext = () => useContext(PlayersContext)
 
-export const PlayersProvider: FC<PlayersProviderProps> = ({ children }) => {
-  const values = usePlayers()
+export const PlayersProvider: FC<PlayersProviderProps> = ({ children, initialValue }) => {
+  const values = usePlayers(initialValue)
   return <PlayersContext.Provider value={values}>{children}</PlayersContext.Provider>
 }

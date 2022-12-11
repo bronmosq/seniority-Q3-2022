@@ -1,6 +1,6 @@
-import { Player, PlayerPosition } from './../utils/interfaces/player'
+import { Player, PlayerPosition } from '../../utils/interfaces/player'
 import axios from 'axios'
-import { AUTHOR_ID } from '../utils/constants/author'
+import { AUTHOR_ID } from '../../utils/constants/author'
 
 const API_URL = 'https://api-q3.onrender.com'
 
@@ -22,7 +22,8 @@ export const getPositions = async () => {
 }
 
 export const addPlayer = async (player: Player) => {
-  await axios.post<Player>(`${API_URL}/player`, player)
+  const response = await axios.post<Player>(`${API_URL}/player`, player)
+  return response.data
 }
 
 export const updatePlayer = async (player: Player) => {
