@@ -16,6 +16,8 @@ export interface PlayersStateContext {
   updatePlayer: (player: Player) => void
   addActivePlayer: (id: number) => void
   handleSearchTerm: (searchTerm: string) => void
+  getPlayers: () => void
+  getPositions: () => void
 }
 
 export interface PlayersProviderProps {

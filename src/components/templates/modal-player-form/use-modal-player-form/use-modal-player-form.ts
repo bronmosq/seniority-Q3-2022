@@ -11,6 +11,7 @@ const useModalPlayerForm = () => {
     activePlayer,
     handleChangeModal
   } = usePlayersContext()
+
   const onSubmit = (player: Player) => {
     if (isEditing) {
       updatePlayer!(player)
@@ -18,6 +19,7 @@ const useModalPlayerForm = () => {
     }
     addPlayer!(player)
   }
+
   return {
     isEditing,
     activeModal,

@@ -8,7 +8,7 @@ import {
   getPositions as getPositionsService
 } from '../../../services/player/player.service'
 import { DEFAULT_POSITIONS } from '../../../utils/constants/player'
-import { PlayersProviderProps, PlayersStateContext } from '../players-context'
+import { PlayersStateContext } from '../players-context'
 
 const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
   const [activeModal, setActiveModal] = useState(initialValues?.activeModal || false)
@@ -133,9 +133,11 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
     addPlayer,
     handleChangeModal,
     addActivePlayer,
-    updatePlayer,
+    updatePlayer: initialValues?.updatePlayer ?? updatePlayer,
     deletePlayer,
-    handleSearchTerm
+    handleSearchTerm,
+    getPlayers,
+    getPositions
   }
 }
 

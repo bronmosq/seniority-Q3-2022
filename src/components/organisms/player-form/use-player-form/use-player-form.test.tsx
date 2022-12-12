@@ -7,7 +7,7 @@ import usePlayerForm from './use-player-form'
 describe('usePlayerForm Hook', () => {
   const onSubmitMock = jest.fn()
   const addPlayerProps: PlayerFormProps = {
-    onSubmit: onSubmitMock(),
+    onSubmit: () => {},
     positions: DEFAULT_POSITIONS,
     isEditng: false
   }
@@ -63,35 +63,57 @@ describe('usePlayerForm Hook', () => {
     expect(buttonEnabled).toBeFalsy()
   })
 
-  //TODO
-  it('should enable button when all inputs are valid', () => {
+  it('should enable button when all inputs are valid', async () => {
     const { result } = renderHook(() => usePlayerForm(addPlayerProps))
     act(() => {
       result.current.handleChangeInput('C', 'firstName')
+    })
+
+    act(() => {
       result.current.handleChangeInput('R', 'lastName')
+    })
+
+    act(() => {
       result.current.handleChangeInput(1, 'idPosition')
+    })
+
+    act(() => {
       result.current.handleChangeInput('test', 'image')
     })
+
     const buttonEnabled = result.current.isButtonEnabled()
-    // expect(buttonEnabled).toBeTruthy()
+    expect(buttonEnabled).toBeTruthy()
   })
 
   it('shouldn`t enable button when almost one input is invalid', () => {
     const { result } = renderHook(() => usePlayerForm(addPlayerProps))
     act(() => {
       result.current.handleChangeInput('C', 'firstName')
+    })
+
+    act(() => {
       result.current.handleChangeInput('R', 'lastName')
+    })
+
+    act(() => {
       result.current.handleChangeInput(1, 'idPosition')
     })
+
     const buttonEnabled = result.current.isButtonEnabled()
     expect(buttonEnabled).toBeFalsy()
   })
 
   it('should call onSubmit function', () => {
-    const { result } = renderHook(() => usePlayerForm(editPlayerProps))
+    const onSubmitMock = jest.fn()
+    const addPlayerProps: PlayerFormProps = {
+      onSubmit: onSubmitMock,
+      positions: DEFAULT_POSITIONS,
+      isEditng: false
+    }
+    const { result } = renderHook(() => usePlayerForm(addPlayerProps))
     act(() => {
       result.current.managePlayer()
     })
-    // expect(onSubmitMock.mock.calls).toHaveLength(1)
+    expect(onSubmitMock).toBeCalledTimes(1)
   })
 })

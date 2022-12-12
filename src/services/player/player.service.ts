@@ -14,6 +14,7 @@ export const fetchPlayers = async () => {
 
 export const deletePlayer = async (id: number) => {
   await axios.delete(`${API_URL}/player/${id}`)
+  return true
 }
 
 export const getPositions = async () => {
@@ -28,4 +29,5 @@ export const addPlayer = async (player: Player) => {
 
 export const updatePlayer = async (player: Player) => {
   await axios.patch(`${API_URL}/player/${player.id}`, player)
+  return true
 }

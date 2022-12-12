@@ -8,7 +8,6 @@ import Slider from '../../atoms/slider/slider'
 import Select from '../../atoms/select/select'
 import usePlayerForm from './use-player-form/use-player-form'
 import { Button } from '../../atoms/button/button'
-// import { usePlayersContext } from '../../../context/players-context/players-context'
 import { Player, PlayerPosition } from '../../../utils/interfaces/player'
 
 export interface PlayerFormProps {

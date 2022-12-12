@@ -15,6 +15,7 @@ export const Select: FC<SelectProps> = ({ selectedValue, label = '', options, on
     <div className="select">
       <label htmlFor={name}>{label}</label>
       <select
+        value={selectedValue}
         name={name}
         className="select__field"
         onChange={(e) => {
@@ -24,7 +25,7 @@ export const Select: FC<SelectProps> = ({ selectedValue, label = '', options, on
         }}
       >
         {options?.map((option) => (
-          <option selected={selectedValue === option.id} key={option.id} value={option.id}>
+          <option key={option.id} value={option.id}>
             {option.description}
           </option>
         ))}

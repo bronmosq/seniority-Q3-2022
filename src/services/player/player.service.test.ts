@@ -22,7 +22,7 @@ describe('Player Service', () => {
         idPosition: 3
       }
     ]
-    mockAxios.get.mockResolvedValue({ data: players })
+    jest.spyOn(axios, 'get').mockResolvedValue({ data: players })
     const playersResponse = await fetchPlayers()
     expect(playersResponse).toEqual(players)
   })
@@ -39,10 +39,9 @@ describe('Player Service', () => {
       idAuthor: 1,
       idPosition: 1
     }
-
-    mockAxios.post.mockResolvedValue({ data: player })
-    const playerResponse = addPlayer(player)
-    // expect(playerResponse).toEqual(player)
+    jest.spyOn(axios, 'post').mockResolvedValue({ data: player })
+    const playerResponse = await addPlayer(player)
+    expect(playerResponse).toEqual(player)
   })
 
   it('should get player positions when getPositions is called', async () => {
@@ -57,7 +56,7 @@ describe('Player Service', () => {
 
     const playerResponse = await deletePlayer(1)
 
-    // expect(playerResponse).toEqual(true)
+    expect(playerResponse).toEqual(true)
   })
 
   it('should return status true when updatePlayer is called', async () => {
@@ -79,6 +78,6 @@ describe('Player Service', () => {
       id: 184
     })
 
-    // expect(playerResponse).toEqual(true)
+    expect(playerResponse).toEqual(true)
   })
 })
