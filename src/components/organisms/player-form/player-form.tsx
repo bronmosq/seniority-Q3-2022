@@ -29,7 +29,7 @@ const PlayerForm: FC<PlayerFormProps> = (props) => {
       <div className="player-form__content-column">
         <div className="player-form__wrapper">
           <div className="player-form__inputs-wrapper">
-            <div>
+            <div className="player-form__input">
               <Input
                 label="Nombre"
                 placeholder="Nombre"

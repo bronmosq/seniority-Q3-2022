@@ -8,6 +8,8 @@
     overflow-y: scroll;
     height: 90%;
     padding: 0 1rem;
+    align-items: center;
+    gap: 20px;
   }
 
   &__image-column {
@@ -47,7 +49,7 @@
     }
   }
   &__input {
-    width: 45%;
+    width: calc(50% - 20px);
     margin-right: 20px;
     @media screen and (max-width: 900px) {
       width: 100%;
