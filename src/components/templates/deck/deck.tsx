@@ -3,6 +3,7 @@ import LoadingOverlay from '../../molecules/loading-overlay/loading-overlay'
 import CardsGrid from '../../organisms/cards-grid/cards-grid'
 import TopBar from '../../organisms/top-bar/top-bar'
 import useSearchPlayers from '../../organisms/cards-grid/use-filter-players/use-filter-players'
+import useDeck from './use-deck/use-deck'
 
 const Deck = () => {
   const {
@@ -13,7 +14,7 @@ const Deck = () => {
     deletePlayer,
     handleSearchTerm,
     searchTerm
-  } = usePlayersContext()
+  } = useDeck()
 
   return (
     <div className="deck">

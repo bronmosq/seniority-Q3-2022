@@ -59,10 +59,10 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
       .catch(() => setPositions(DEFAULT_POSITIONS))
   }
 
-  useEffect(() => {
-    getPositions()
-    getPlayers()
-  }, [])
+  // useEffect(() => {
+  //   getPositions()
+  //   getPlayers()
+  // }, [])
 
   const addPlayer = (player: Player) => {
     setShowLoadingOverlay(true)
@@ -130,7 +130,7 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
     activeModal,
     activePlayer,
     showLoadingOverlay,
-    addPlayer,
+    addPlayer: initialValues?.addPlayer ?? addPlayer,
     handleChangeModal,
     addActivePlayer,
     updatePlayer: initialValues?.updatePlayer ?? updatePlayer,

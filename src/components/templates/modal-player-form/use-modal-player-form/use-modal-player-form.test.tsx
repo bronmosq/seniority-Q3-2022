@@ -5,7 +5,7 @@ import { EMPTY_PLAYER } from '../../../../utils/constants/player'
 import useModalPlayerForm from './use-modal-player-form'
 
 describe('useModalPlayerForm Hook', () => {
-  it.only('should execute onSubmit function', () => {
+  it.only('should execute updatePlayer function', () => {
     const mockUpdatePlayer = jest.fn()
     const { result } = renderHook(() => useModalPlayerForm(), {
       wrapper: ({ children }) => (
@@ -18,5 +18,20 @@ describe('useModalPlayerForm Hook', () => {
       result.current.onSubmit(EMPTY_PLAYER)
     })
     expect(mockUpdatePlayer).toBeCalledTimes(1)
+  })
+
+  it.only('should execute addPlayer function', () => {
+    const mockAddPlayer = jest.fn()
+    const { result } = renderHook(() => useModalPlayerForm(), {
+      wrapper: ({ children }) => (
+        <PlayersProvider initialValue={{ isEditing: false, addPlayer: mockAddPlayer }}>
+          {children}
+        </PlayersProvider>
+      )
+    })
+    act(() => {
+      result.current.onSubmit(EMPTY_PLAYER)
+    })
+    expect(mockAddPlayer).toBeCalledTimes(1)
   })
 })
