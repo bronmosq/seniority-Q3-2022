@@ -1,5 +1,4 @@
 import { renderHook, act } from '@testing-library/react-hooks'
-import React from 'react'
 import { PlayersProvider } from '../../../../context/players-context/players-context'
 import { EMPTY_PLAYER } from '../../../../utils/constants/player'
 import useModalPlayerForm from './use-modal-player-form'
