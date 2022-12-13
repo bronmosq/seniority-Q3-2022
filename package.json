@@ -78,7 +78,10 @@
       "<rootDir>/src/**/*.{ts,tsx}",
       "!src/**/*.{interfaces,styles,d}.{ts,tsx}",
       "!src/index.tsx",
-      "!src/reportWebVitals.ts"
+      "!src/reportWebVitals.ts",
+      "!src/utils/enums/*",
+      "!src/utils/interfaces/*",
+      "!src/utils/constants/*"
     ]
   }
 }

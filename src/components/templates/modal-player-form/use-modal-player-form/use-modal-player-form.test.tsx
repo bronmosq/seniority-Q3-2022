@@ -19,7 +19,7 @@ describe('useModalPlayerForm Hook', () => {
     expect(mockUpdatePlayer).toBeCalledTimes(1)
   })
 
-  it.only('should execute addPlayer function', () => {
+  it('should execute addPlayer function', () => {
     const mockAddPlayer = jest.fn()
     const { result } = renderHook(() => useModalPlayerForm(), {
       wrapper: ({ children }) => (
