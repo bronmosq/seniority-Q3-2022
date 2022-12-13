@@ -4,7 +4,7 @@ import { EMPTY_PLAYER } from '../../../../utils/constants/player'
 import useModalPlayerForm from './use-modal-player-form'
 
 describe('useModalPlayerForm Hook', () => {
-  it.only('should execute updatePlayer function', () => {
+  it('should execute updatePlayer function', () => {
     const mockUpdatePlayer = jest.fn()
     const { result } = renderHook(() => useModalPlayerForm(), {
       wrapper: ({ children }) => (

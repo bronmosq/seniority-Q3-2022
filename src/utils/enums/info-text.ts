@@ -7,5 +7,6 @@ export enum InfoText {
   ADD_PLAYER_MODAL_TITLE = 'Agregar jugador',
   EDIT_PLAYER_MODAL_TITLE = 'Editar jugador',
   ADD_PLAYER_MODAL_BUTTON = 'Agregar',
-  EDIT_PLAYER_MODAL_BUTTON = 'Modificar'
+  EDIT_PLAYER_MODAL_BUTTON = 'Modificar',
+  TITLE = 'MI EQUIPO'
 }

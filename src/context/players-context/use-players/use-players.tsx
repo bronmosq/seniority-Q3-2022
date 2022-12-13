@@ -31,10 +31,6 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
     setActiveModal(!activeModal)
   }
 
-  const handleChangeEditing = () => {
-    setIsEditing(!isEditing)
-  }
-
   const handleSearchTerm = (term: string) => {
     setSearchTerm(term)
   }
@@ -59,11 +55,6 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
       .catch(() => setPositions(DEFAULT_POSITIONS))
   }
 
-  // useEffect(() => {
-  //   getPositions()
-  //   getPlayers()
-  // }, [])
-
   const addPlayer = (player: Player) => {
     setShowLoadingOverlay(true)
     addPlayerService(player)
@@ -76,13 +67,14 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
         const newPlayer = { id: Math.floor(Math.random() * 200), ...player }
         setPlayersList([...playersList, newPlayer])
         setSearchTerm('')
+        setShowLoadingOverlay(false)
       })
     handleChangeModal()
   }
 
-  const addActivePlayer = (id: number) => {
-    const player = playersList.find(({ id: playerId }) => playerId === id)
-    handleChangeEditing()
+  const addActivePlayer = (playerId: number) => {
+    const player = playersList.find(({ id }) => id === playerId)
+    setIsEditing(true)
     setActivePlayer(player)
     handleChangeModal()
   }
@@ -103,14 +95,14 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
   }
 
   const updatePlayer = async (editedPlayer: Player) => {
+    setShowLoadingOverlay(true)
+
     updatePlayerService(editedPlayer!)
       .then(() => {
-        handleChangeModal()
         getPlayers()
         setSearchTerm('')
       })
       .catch(() => {
-        handleChangeModal()
         const newList = playersList.map((player) => {
           if (player.id === editedPlayer.id) {
             return editedPlayer
@@ -119,7 +111,10 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
         })
         setPlayersList(newList)
         setSearchTerm('')
+
+        setShowLoadingOverlay(false)
       })
+    handleChangeModal()
   }
 
   return {
@@ -136,8 +131,8 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
     updatePlayer: initialValues?.updatePlayer ?? updatePlayer,
     deletePlayer,
     handleSearchTerm,
-    getPlayers,
-    getPositions
+    getPlayers: initialValues?.getPlayers ?? getPlayers,
+    getPositions: initialValues?.getPositions ?? getPositions
   }
 }
 

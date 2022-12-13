@@ -4,6 +4,7 @@ import CardsGrid from '../../organisms/cards-grid/cards-grid'
 import TopBar from '../../organisms/top-bar/top-bar'
 import useSearchPlayers from '../../organisms/cards-grid/use-filter-players/use-filter-players'
 import useDeck from './use-deck/use-deck'
+import { InfoText } from '../../../utils/enums/info-text'
 
 const Deck = () => {
   const {
@@ -18,7 +19,7 @@ const Deck = () => {
 
   return (
     <div className="deck">
-      <h1 className="deck__title">MI EQUIPO</h1>
+      <h1 className="deck__title">{InfoText.TITLE}</h1>
       <TopBar
         searchTerm={searchTerm}
         handleSearchTerm={handleSearchTerm}
