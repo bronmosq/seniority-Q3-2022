@@ -4,6 +4,8 @@ import { AUTHOR_ID } from '../../utils/constants/author'
 
 const API_URL = 'https://api-q3.onrender.com'
 
+axios.defaults.timeout = 2000
+
 export const fetchPlayers = async () => {
   const headers = {
     author: AUTHOR_ID!

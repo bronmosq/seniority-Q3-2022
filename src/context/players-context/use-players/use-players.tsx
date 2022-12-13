@@ -37,84 +37,54 @@ const usePlayers = (initialValues?: Partial<PlayersStateContext>) => {
 
   const getPlayers = () => {
     setShowLoadingOverlay(true)
-    fetchPlayers()
-      .then((res) => {
-        setPlayersList(res)
-        setShowLoadingOverlay(false)
-        setSearchTerm('')
-      })
-      .catch(() => {
-        setShowLoadingOverlay(false)
-        setSearchTerm('')
-      })
+    fetchPlayers().then((res) => {
+      setPlayersList(res)
+      setShowLoadingOverlay(false)
+      setSearchTerm('')
+    })
+    setShowLoadingOverlay(false)
+    setSearchTerm('')
   }
 
-  const getPositions = async () => {
-    await getPositionsService()
-      .then((res) => setPositions(res))
-      .catch(() => setPositions(DEFAULT_POSITIONS))
+  const getPositions = () => {
+    getPositionsService().then((res) => setPositions(res))
   }
 
   const addPlayer = (player: Player) => {
     setShowLoadingOverlay(true)
-    addPlayerService(player)
-      .then(() => {
-        getPlayers()
-        setSearchTerm('')
-      })
-      .catch(() => {
-        delete player.id
-        const newPlayer = { id: Math.floor(Math.random() * 200), ...player }
-        setPlayersList([...playersList, newPlayer])
-        setSearchTerm('')
-        setShowLoadingOverlay(false)
-      })
-    handleChangeModal()
+    addPlayerService(player).then(() => {
+      getPlayers()
+    })
+    setSearchTerm('')
+    setShowLoadingOverlay(false)
+    setActiveModal(false)
   }
 
   const addActivePlayer = (playerId: number) => {
     const player = playersList.find(({ id }) => id === playerId)
     setIsEditing(true)
     setActivePlayer(player)
-    handleChangeModal()
+    setIsEditing(false)
+    setActiveModal(true)
   }
 
-  const deletePlayer = async (id: number) => {
+  const deletePlayer = (id: number) => {
     setShowLoadingOverlay(true)
-    deletePlayerService(id)
-      .then(() => {
-        getPlayers()
-        setSearchTerm('')
-      })
-      .catch(() => {
-        const newList = playersList.filter((player) => player.id !== id)
-        setPlayersList(newList)
-        setShowLoadingOverlay(false)
-        setSearchTerm('')
-      })
+    deletePlayerService(id).then(() => {
+      getPlayers()
+    })
+    setShowLoadingOverlay(false)
+    setSearchTerm('')
   }
 
-  const updatePlayer = async (editedPlayer: Player) => {
+  const updatePlayer = (editedPlayer: Player) => {
     setShowLoadingOverlay(true)
-
-    updatePlayerService(editedPlayer!)
-      .then(() => {
-        getPlayers()
-        setSearchTerm('')
-      })
-      .catch(() => {
-        const newList = playersList.map((player) => {
-          if (player.id === editedPlayer.id) {
-            return editedPlayer
-          }
-          return player
-        })
-        setPlayersList(newList)
-        setSearchTerm('')
-
-        setShowLoadingOverlay(false)
-      })
-    handleChangeModal()
+    updatePlayerService(editedPlayer!).then(() => {
+      getPlayers()
+    })
+    setSearchTerm('')
+    setShowLoadingOverlay(false)
+    setActiveModal(false)
   }
 
   return {

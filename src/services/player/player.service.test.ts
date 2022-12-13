@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { Player } from '../../utils/interfaces/player'
 import { fetchPlayers, addPlayer, getPositions, deletePlayer, updatePlayer } from './player.service'
-const API_URL = 'https://api-q3.onrender.com'
 
 jest.mock('axios')
 const mockAxios = axios as jest.Mocked<typeof axios>
