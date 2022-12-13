@@ -1,14 +1,11 @@
 import { renderHook, act } from '@testing-library/react-hooks'
 import { DEFAULT_POSITIONS } from '../../../utils/constants/player'
 import { Player } from '../../../utils/interfaces/player'
-import { PlayersProvider, PlayersStateContext } from '../players-context'
+import { PlayersStateContext } from '../players-context'
 import axios from 'axios'
-import { addPlayer, fetchPlayers } from '../../../services/player/player.service'
 import usePlayers from './use-players'
 
 describe('usePlayersTest', () => {
-  const mockAxios = axios as jest.Mocked<typeof axios>
-
   it('should toggleModal when calling handleChangeModal', () => {
     const initialValues: Partial<PlayersStateContext> = {
       playersList: [

@@ -1,4 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { act } from 'react-dom/test-utils'
 import { DEFAULT_POSITIONS, DEFAULT_IMAGE } from '../../../utils/constants/player'
 import PlayerForm from './player-form'
 
@@ -45,5 +47,35 @@ describe('Player Form Test', () => {
     render(<PlayerForm onSubmit={() => {}} positions={DEFAULT_POSITIONS} isEditng={false} />)
     const img: HTMLImageElement = screen.getByRole('img')
     expect(img.src).toBe(DEFAULT_IMAGE)
+  })
+
+  it('shouldn`t display default image when image input is fully', () => {
+    render(<PlayerForm onSubmit={() => {}} positions={DEFAULT_POSITIONS} isEditng={false} />)
+    const img: HTMLImageElement = screen.getByRole('img')
+    const imgInput = screen.getByPlaceholderText('Imagen')
+    act(() => {
+      userEvent.type(imgInput, 'test')
+    })
+    expect(img.src).not.toBe(DEFAULT_IMAGE)
+  })
+
+  it('should`nt display 3 labels when inputs fields are empty ', () => {
+    const { container } = render(
+      <PlayerForm onSubmit={() => {}} positions={DEFAULT_POSITIONS} isEditng={false} />
+    )
+    const firstNameInput = screen.getByPlaceholderText('Nombre')
+    const lastNameInput = screen.getByPlaceholderText('Apellido')
+    const imgInput = screen.getByPlaceholderText('Imagen')
+    act(() => {
+      userEvent.type(imgInput, 'test')
+    })
+    act(() => {
+      userEvent.type(firstNameInput, 'test')
+    })
+    act(() => {
+      userEvent.type(lastNameInput, 'test')
+    })
+    const errors = container.getElementsByClassName('input__field')
+    expect(errors).toHaveLength(3)
   })
 })
